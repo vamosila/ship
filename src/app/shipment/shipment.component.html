@@ -1,1 +1,31 @@
-<p>shipment works!</p>
+<h1 class="mt-2">Hajórakományok</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Azonosító</th>
+            <th>Szállítmányazonosító</th>
+            <th>Küldés</th>
+            <th>Érkezés</th>
+            <th>Címzett</th>
+            <th>Célváros</th>
+            <th>Létrehozva</th>
+            <th>Módosítva</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (shipment of shipments; track shipment.id) {
+            <tr>
+                <td>{{ shipment.id }}</td>
+                <td>{{ shipment.shipmentId }}</td>
+                <td>{{ shipment.sentDate }}</td>
+                <td>{{ shipment.endDate }}</td>
+                <td>{{ shipment.addressee }}</td>
+                <td>{{ shipment.targetCity }}</td>
+                <td>{{ shipment.createdAt }}</td>
+                <td>{{ shipment.updatedAt }}</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
