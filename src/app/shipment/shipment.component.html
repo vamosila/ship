@@ -1,8 +1,23 @@
+<!--
+* File: shipment.component.html
+* Author: Vámosi László Ádám
+* Copyright: 2025, Vámosi László Ádám
+* Group: Szoft II-N
+* Date: 2025-10-17
+* GitHub: https://github.com/vamosilaszloadam/
+* Licenc: MIT
+-->
+
 <h1 class="mt-2">Hajórakományok</h1>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#operationModal" (click)="addMode=true;shipmentForm.reset()">
+<button type="button" class="btn btn-primary mb-2 me-2" data-bs-toggle="modal" data-bs-target="#operationModal" (click)="addMode=true;shipmentForm.reset()">
   Hozzáadás
+</button>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-info mb-2" data-bs-toggle="modal" data-bs-target="#aboutModal">
+  Névjegy
 </button>
 
 <table class="table table-striped">
@@ -89,6 +104,30 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bezárás</button>
         <button form="shipmentForm" type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="shipmentForm.invalid">Mentés</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="aboutModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="aboutModalLabel">Névjegy</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="about">
+            <p>Vámosi László Ádám</p>
+            <p>2025-10-17</p>
+            <p>SZOFT II-N</p>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bezárás</button>
       </div>
     </div>
   </div>

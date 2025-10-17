@@ -1,3 +1,13 @@
+/*
+* File: api.service.ts
+* Author: Vámosi László Ádám
+* Copyright: 2025, Vámosi László Ádám
+* Group: Szoft II-N
+* Date: 2025-10-17
+* GitHub: https://github.com/vamosilaszloadam/
+* Licenc: MIT
+*/
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
