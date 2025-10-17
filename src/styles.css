@@ -1,1 +1,50 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'bootstrap';
+
+.table{
+    font-size: 1dvw;
+}
+
+td, th{
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 955px){
+    table, thead, tbody, tr, th, td{
+        display: block;
+    }
+    thead tr{
+        display: none;
+    }
+    .miniId::before{ content: "Id "; }
+    .miniShipmentId::before{ content: "Sz. Id "; }
+    .miniSentDate::before{ content: "Küldés "; }
+    .miniEndDate::before{ content: "Érkezés "; }
+    .miniAddressee::before{ content: "Címzett "; }
+    .miniTargetCity::before{ content: "Célváros "; }
+    .miniCreatedAt::before{ content: "Létrehozva "; }
+    .miniUpdatedAt::before{ content: "Módosítva "; }
+    .mini::before{
+        font-weight: bold;
+        display: inline-block;
+        width: 100px;
+    }
+    .mini{
+        font-size: 2dvw;
+    }
+    .miniRow{
+        display: block;
+        margin-bottom: 20px;
+        border: 1px solid black;
+    }
+}
+
+@media screen and (max-width: 390px){
+    .mini{
+        font-size: 3dvw;
+    }
+}
+
+.container, .container-fluid{
+    min-width: 220px;
+}

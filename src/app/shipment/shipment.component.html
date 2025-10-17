@@ -1,5 +1,10 @@
 <h1 class="mt-2">Hajórakományok</h1>
 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#operationModal" (click)="addMode=true;shipmentForm.reset()">
+  Hozzáadás
+</button>
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -16,16 +21,75 @@
     <tbody>
         @for (shipment of shipments; track shipment.id) {
             <tr>
-                <td>{{ shipment.id }}</td>
-                <td>{{ shipment.shipmentId }}</td>
-                <td>{{ shipment.sentDate }}</td>
-                <td>{{ shipment.endDate }}</td>
-                <td>{{ shipment.addressee }}</td>
-                <td>{{ shipment.targetCity }}</td>
-                <td>{{ shipment.createdAt }}</td>
-                <td>{{ shipment.updatedAt }}</td>
+                <td class="mini miniId">{{ shipment.id }}</td>
+                <td class="mini miniShipmentId">{{ shipment.shipmentId }}</td>
+                <td class="mini miniSentDate">{{ shipment.sentDate }}</td>
+                <td class="mini miniEndDate">{{ shipment.endDate }}</td>
+                <td class="mini miniAddressee">{{ shipment.addressee }}</td>
+                <td class="mini miniTargetCity">{{ shipment.targetCity }}</td>
+                <td class="mini miniCreatedAt">{{ shipment.createdAt }}</td>
+                <td class="mini miniUpdatedAt">{{ shipment.updatedAt }}</td>
+                <td>
+                    <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#operationModal" (click)="editData(shipment)">Módosítás</button>
+                    <button type="button" class="btn btn-danger" (click)="deleteData(shipment.id)">Törlés</button>
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
+<!-- Modal -->
+<div class="modal fade" id="operationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="operationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="operationModalLabel">{{ addMode ? 'Hozzáadás' : 'Módosítás' }}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form id="shipmentForm" [formGroup]="shipmentForm" (ngSubmit)="saveData()">
+            <div>
+                <label for="id" class="form-label">ID</label>
+                <input type="text" id="id" class="form-control" formControlName="id" readonly>
+            </div>
+            <div>
+                <label for="shipmentId" class="form-label">Szállítmányazonosító</label>
+                <input type="text" id="shipmentId" class="form-control" formControlName="shipmentId" required [readonly]="!addMode" 
+                    [class.is-invalid]="shipmentForm.get('shipmentId')?.invalid && shipmentForm.get('shipmentId')?.touched"
+                    [class.is-valid]="shipmentForm.get('shipmentId')?.valid && addMode">
+            </div>
+            <div>
+                <label for="sentDate" class="form-label">Küldés</label>
+                <input type="date" id="sentDate" class="form-control" formControlName="sentDate" required 
+                    [class.is-invalid]="shipmentForm.get('sentDate')?.invalid && shipmentForm.get('sentDate')?.touched"
+                    [class.is-valid]="shipmentForm.get('sentDate')?.valid">
+            </div>
+            <div>
+                <label for="endDate" class="form-label">Érkezés</label>
+                <input type="date" id="endDate" class="form-control" formControlName="endDate" required [attr.min]="shipmentForm.value.sentDate || null" 
+                    [class.is-invalid]="shipmentForm.get('endDate')?.invalid && shipmentForm.get('endDate')?.touched"
+                    [class.is-valid]="shipmentForm.get('endDate')?.valid">
+            </div>
+            <div>
+                <label for="addressee" class="form-label">Címzett</label>
+                <input type="text" id="addressee" class="form-control" formControlName="addressee" required
+                    [class.is-invalid]="shipmentForm.get('addressee')?.invalid && shipmentForm.get('addressee')?.touched"
+                    [class.is-valid]="shipmentForm.get('addressee')?.valid">
+            </div>
+            <div>
+                <label for="targetCity" class="form-label">Célváros</label>
+                <input type="text" id="targetCity" class="form-control" formControlName="targetCity" required
+                    [class.is-invalid]="shipmentForm.get('targetCity')?.invalid && shipmentForm.get('targetCity')?.touched"
+                    [class.is-valid]="shipmentForm.get('targetCity')?.valid">
+            </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bezárás</button>
+        <button form="shipmentForm" type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="shipmentForm.invalid">Mentés</button>
+      </div>
+    </div>
+  </div>
+</div>
